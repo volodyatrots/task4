@@ -1,45 +1,29 @@
 package com.epam.lab;
 
-import com.epam.lab.pageobjects.DraftsPage;
-import com.epam.lab.pageobjects.GmailInboxPage;
-import com.epam.lab.pageobjects.GmailLoginPage;
-import com.epam.lab.pageobjects.LetterPage;
+import com.epam.lab.businessobjects.GmailLoginBO;
+import com.epam.lab.businessobjects.MessagesBO;
 import com.epam.lab.propmodel.GmailData;
 import com.epam.lab.propmodel.WebDriverData;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
 import static org.testng.Assert.assertNotNull;
-
-
-
-/*Task 5
-        1. Open gmail & login
-        2. Click on “compose” button
-        3. Fill the next fields: to,subject & message
-        4. Click on “save & close” button
-        5. Go to the “draft” folder & open previously saved message
-        6. Verify that all fields are saved correctly
-        7. Press the “send” button*/
+import static org.testng.Assert.assertTrue;
 
 
 public class TestGmail {
     private WebDriver driver;
-    private GmailLoginPage loginPage;
-    private GmailInboxPage inboxPage;
-    private LetterPage letterPage;
-    private DraftsPage draftsPage;
     private GmailData gmailData;
+    private GmailLoginBO gmailLoginBO;
+    private MessagesBO messagesBO;
 
     @BeforeClass
-    public void setUp() throws IOException {
+    public void setUp() {
         WebDriverData webDriverData = new WebDriverData();
         System.setProperty(webDriverData.getChromeDriver(), webDriverData.getUrl());
         driver = new ChromeDriver() {
@@ -49,45 +33,34 @@ public class TestGmail {
         };
 
         gmailData = new GmailData();
-        loginPage = new GmailLoginPage(driver);
-        inboxPage = new GmailInboxPage(driver);
-        letterPage = new LetterPage(driver);
-        draftsPage = new DraftsPage(driver);
+        gmailLoginBO = new GmailLoginBO(driver);
+        messagesBO = new MessagesBO(driver);
     }
 
     @Test
     public void sendFromDrafts() {
 
-        loginPage.openLoginPage(gmailData.getGmailLink());
+        gmailLoginBO.openLoginPage(gmailData.getGmailLink());
 
-        loginPage.enterEmail(gmailData.getUserMail());
+        gmailLoginBO.login(gmailData.getUserMail(), gmailData.getUserPassword());
 
-        loginPage.enterPassword(gmailData.getUserPassword());
+        assertTrue(gmailLoginBO.checkLoginSuccess());
 
-        inboxPage.composeLetter();
+        messagesBO.writeLetterAndSave(gmailData.getMailTo(), gmailData.getMailSubject(), gmailData.getMailMessage());
 
-        letterPage.enterEmailTo(gmailData.getMailTo());
+        messagesBO.openDrafts();
 
-        letterPage.enterEmailSubject(gmailData.getMailSubject());
+        assertTrue(messagesBO.checkLoadDrafts());
 
-        letterPage.enterMessage(gmailData.getMailMessage());
+        messagesBO.openMyLetter();
 
-        letterPage.closeLetter();
+        messagesBO.sendLetter();
 
-        draftsPage.openDrafts();
-
-        draftsPage.waitLoadDrafts();
-
-        draftsPage.openMyLetter();
-
-        letterPage.sendLetter();
-
-        assertNotNull(driver.findElement(By.xpath("//span[@class='ag a8k']")));
+        assertNotNull(messagesBO.checkSentMessage());
     }
 
     @AfterClass
     public void closeDriver() {
-        driver.close();
         driver.quit();
     }
 }

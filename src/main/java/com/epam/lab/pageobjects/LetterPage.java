@@ -8,6 +8,9 @@ public class LetterPage extends AbstractGmailPage {
     @FindBy(className = "vO")
     private WebElement mailToInput;
 
+    @FindBy(xpath = ("//span[@class='ag a8k']"))
+    private WebElement showSentMessage;
+
     @FindBy(className = "aoT")
     private WebElement mailSubjectInput;
 
@@ -45,5 +48,8 @@ public class LetterPage extends AbstractGmailPage {
         sendButton.click();
     }
 
+    public WebElement checkSentMessage() {
+        return showSentMessage;
+    }
 
 }

@@ -7,9 +7,22 @@ import java.util.Properties;
 public class GmailData {
     private Properties prop = new Properties();
 
-    public GmailData() throws IOException {
-        FileInputStream input = new FileInputStream("src/resources/gmailData.properties");
-        prop.load(input);
+    public GmailData() {
+        FileInputStream input = null;
+        try {
+            input = new FileInputStream("src/resources/gmailData.properties");
+            prop.load(input);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (input != null) {
+                    input.close();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     public String getGmailLink() {
