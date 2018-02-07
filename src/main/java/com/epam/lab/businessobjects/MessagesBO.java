@@ -3,7 +3,6 @@ package com.epam.lab.businessobjects;
 import com.epam.lab.pageobjects.DraftsPage;
 import com.epam.lab.pageobjects.GmailInboxPage;
 import com.epam.lab.pageobjects.LetterPage;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 public class MessagesBO {
@@ -12,10 +11,10 @@ public class MessagesBO {
     private LetterPage letterPage;
 
 
-    public MessagesBO(WebDriver driver) {
-        draftsPage = new DraftsPage(driver);
-        gmailInboxPage = new GmailInboxPage(driver);
-        letterPage = new LetterPage(driver);
+    public MessagesBO() {
+        draftsPage = new DraftsPage();
+        gmailInboxPage = new GmailInboxPage();
+        letterPage = new LetterPage();
     }
 
     public void writeLetterAndSave(String mailTo, String mailSubject, String mailMessage) {

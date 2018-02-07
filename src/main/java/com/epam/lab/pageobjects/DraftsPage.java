@@ -1,5 +1,6 @@
 package com.epam.lab.pageobjects;
 
+import com.epam.lab.control.PageElement;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -9,15 +10,12 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 public class DraftsPage extends AbstractGmailPage {
     private Boolean statusLoad;
     @FindBy(xpath = "//span[@class='nU n1']")
-    private WebElement draftsButton;
+    private PageElement draftsButton;
     @FindBy(xpath = "//input[@name='q']")
-    private WebElement searchField;
+    private PageElement searchField;
     @FindBy(xpath = "//span[contains(text(),'Hi!')]")
-    private WebElement myLetter;
+    private PageElement myLetter;
 
-    public DraftsPage(WebDriver driver) {
-        super(driver);
-    }
 
     public void openDrafts() {
         draftsButton.click();

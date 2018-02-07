@@ -2,15 +2,14 @@ package com.epam.lab.businessobjects;
 
 import com.epam.lab.pageobjects.GmailInboxPage;
 import com.epam.lab.pageobjects.GmailLoginPage;
-import org.openqa.selenium.WebDriver;
 
 public class GmailLoginBO {
     private GmailInboxPage gmailInboxPage;
     private GmailLoginPage gmailLoginPage;
 
-    public GmailLoginBO(WebDriver driver) {
-        gmailLoginPage = new GmailLoginPage(driver);
-        gmailInboxPage = new GmailInboxPage(driver);
+    public GmailLoginBO() {
+        gmailLoginPage = new GmailLoginPage();
+        gmailInboxPage = new GmailInboxPage();
     }
 
     public void openLoginPage(String link) {

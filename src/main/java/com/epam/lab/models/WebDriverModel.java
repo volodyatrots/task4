@@ -1,13 +1,13 @@
-package com.epam.lab.propmodel;
+package com.epam.lab.models;
 
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Properties;
 
-public class WebDriverData {
+public class WebDriverModel {
     private Properties prop = new Properties();
 
-    public WebDriverData() {
+    public WebDriverModel() {
         FileInputStream input = null;
         try {
             input = new FileInputStream("src/resources/driver.properties");

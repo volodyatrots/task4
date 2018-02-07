@@ -2,47 +2,52 @@ package com.epam.lab;
 
 import com.epam.lab.businessobjects.GmailLoginBO;
 import com.epam.lab.businessobjects.MessagesBO;
-import com.epam.lab.propmodel.GmailData;
-import com.epam.lab.propmodel.WebDriverData;
+import com.epam.lab.driver.DriverFactory;
+import com.epam.lab.models.GmailData;
+import com.epam.lab.models.unmarsheller.User;
+import com.epam.lab.models.unmarsheller.UserDataUnmarshaller;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.BeforeClass;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-import java.util.concurrent.TimeUnit;
+import java.util.List;
 
 import static org.testng.Assert.assertNotNull;
 import static org.testng.Assert.assertTrue;
 
 
 public class TestGmail {
+    List<User> users;
     private WebDriver driver;
     private GmailData gmailData;
     private GmailLoginBO gmailLoginBO;
     private MessagesBO messagesBO;
 
-    @BeforeClass
-    public void setUp() {
-        WebDriverData webDriverData = new WebDriverData();
-        System.setProperty(webDriverData.getChromeDriver(), webDriverData.getUrl());
-        driver = new ChromeDriver() {
-            {
-                manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-            }
+    @DataProvider(parallel = true)
+    public Object[][] getUsersData() {
+        users = new UserDataUnmarshaller().createObjectsUserData();
+        return new Object[][]{
+                {users.get(0).getEmail(), users.get(0).getPassword()},
+                {users.get(1).getEmail(), users.get(1).getPassword()}
         };
-
-        gmailData = new GmailData();
-        gmailLoginBO = new GmailLoginBO(driver);
-        messagesBO = new MessagesBO(driver);
     }
 
-    @Test
-    public void sendFromDrafts() {
+    @BeforeMethod
+    public void setUp() {
+        gmailData = new GmailData();
+        gmailLoginBO = new GmailLoginBO();
+        messagesBO = new MessagesBO();
+    }
+
+
+    @Test(dataProvider = "getUsersData",threadPoolSize = 2)
+    public void sendFromDrafts(String email, String password) {
 
         gmailLoginBO.openLoginPage(gmailData.getGmailLink());
 
-        gmailLoginBO.login(gmailData.getUserMail(), gmailData.getUserPassword());
+        gmailLoginBO.login(email, password);
 
         assertTrue(gmailLoginBO.checkLoginSuccess());
 
@@ -59,8 +64,8 @@ public class TestGmail {
         assertNotNull(messagesBO.checkSentMessage());
     }
 
-    @AfterClass
+    @AfterMethod
     public void closeDriver() {
-        driver.quit();
+        DriverFactory.getInstance().removeDriver();
     }
 }
