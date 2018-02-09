@@ -1,5 +1,6 @@
 package com.epam.lab.businessobjects;
 
+import com.epam.lab.models.unmarsheller.User;
 import com.epam.lab.pageobjects.GmailInboxPage;
 import com.epam.lab.pageobjects.GmailLoginPage;
 
@@ -12,14 +13,14 @@ public class GmailLoginBO {
         gmailInboxPage = new GmailInboxPage();
     }
 
-    public void openLoginPage(String link) {
-        gmailLoginPage.openLoginPage(link);
+    public void openLoginPage() {
+        gmailLoginPage.openLoginPage();
     }
 
 
-    public void login(String mail, String pass) {
-        gmailLoginPage.enterEmail(mail);
-        gmailLoginPage.enterPassword(pass);
+    public void login(User user) {
+        gmailLoginPage.enterEmail(user.getEmail());
+        gmailLoginPage.enterPassword(user.getPassword());
     }
 
     public boolean checkLoginSuccess() {

@@ -4,13 +4,13 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Properties;
 
-public class WebDriverModel {
+public class ConfigProperty {
     private Properties prop = new Properties();
 
-    public WebDriverModel() {
+    public ConfigProperty() {
         FileInputStream input = null;
         try {
-            input = new FileInputStream("src/resources/driver.properties");
+            input = new FileInputStream("src/resources/config.properties");
             prop.load(input);
         } catch (IOException e) {
             e.printStackTrace();
@@ -31,5 +31,17 @@ public class WebDriverModel {
 
     public String getUrl() {
         return prop.getProperty("pathDriver");
+    }
+
+    public String getGmailLink() {
+        return prop.getProperty("mailLink");
+    }
+
+    public String getPathMessage() {
+        return prop.getProperty("pathMessage");
+    }
+
+    public String getPathUserData() {
+        return prop.getProperty("pathUserData");
     }
 }

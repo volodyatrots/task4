@@ -1,6 +1,5 @@
 package com.epam.lab.driver;
 
-import com.epam.lab.models.WebDriverModel;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
@@ -8,27 +7,34 @@ import java.util.concurrent.TimeUnit;
 
 public class Driver {
 
-    private static WebDriver driver;
-
     private Driver() {
     }
 
-    public static void createDriver() {
+    private static final ThreadLocal<WebDriver> threadLocalScope = new ThreadLocal<WebDriver>() {
+        @Override
+        protected WebDriver initialValue() {
+            System.out.println("Thread " + Thread.currentThread().getId());
 
-        WebDriverModel webDriverModel = new WebDriverModel();
-        System.setProperty(webDriverModel.getChromeDriver(), webDriverModel.getUrl());
-        driver = new ChromeDriver() {
-            {
-                manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+            WebDriver driver = new ChromeDriver();
+            driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+
+            return driver;
+        }
+    };
+
+    public static void close() {
+        if (getDriver() != null) {
+            try {
+                getDriver().quit();
+            } catch (Exception e) {
+                e.printStackTrace();
             }
-        };
+            threadLocalScope.remove();
+        }
     }
-
 
     public static WebDriver getDriver() {
-        if (driver == null) {
-            createDriver();
-        }
-        return driver;
+        return threadLocalScope.get();
     }
+
 }

@@ -1,8 +1,6 @@
 package com.epam.lab.pageobjects;
 
 import com.epam.lab.control.PageElement;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 public class LetterPage extends AbstractGmailPage {
@@ -12,13 +10,13 @@ public class LetterPage extends AbstractGmailPage {
     @FindBy(xpath = ("//span[@class='ag a8k']"))
     private PageElement showSentMessage;
 
-    @FindBy(className = "aoT")
+    @FindBy(css = ".aoT")
     private PageElement mailSubjectInput;
 
-    @FindBy(css = "div[class='Am Al editable LW-avf'")
+    @FindBy(css = "div[class='Am Al editable LW-avf']")
     private PageElement mailMessageInput;
 
-    @FindBy(className = "Ha")
+    @FindBy(css = ".Ha")
     private PageElement closeButton;
 
     @FindBy(css = "td[class='gU Up']")

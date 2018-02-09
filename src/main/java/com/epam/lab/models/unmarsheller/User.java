@@ -9,9 +9,6 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class User {
     private String email;
     private String password;
-    private String mailto;
-    private String mailsubject;
-    private String mailmessage;
 
 
     public String getEmail() {
@@ -28,30 +25,6 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public String getMailto() {
-        return mailto;
-    }
-
-    public void setMailto(String mailto) {
-        this.mailto = mailto;
-    }
-
-    public String getMailsubject() {
-        return mailsubject;
-    }
-
-    public void setMailsubject(String mailsubject) {
-        this.mailsubject = mailsubject;
-    }
-
-    public String getMailmessage() {
-        return mailmessage;
-    }
-
-    public void setMailmessage(String mailmessage) {
-        this.mailmessage = mailmessage;
     }
 
 }

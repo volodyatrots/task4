@@ -1,18 +1,18 @@
 package com.epam.lab.pageobjects;
 
+
 import com.epam.lab.control.CustomFieldDecorator;
-import com.epam.lab.driver.DriverFactory;
-import org.openqa.selenium.WebDriver;
+import com.epam.lab.driver.Driver;
+import com.epam.lab.models.ConfigProperty;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.pagefactory.DefaultElementLocatorFactory;
 
-abstract class AbstractGmailPage {
-    WebDriver driver;
+class AbstractGmailPage {
 
     AbstractGmailPage() {
-        this.driver = DriverFactory.getInstance().getDriver();
+        ConfigProperty configProperty = new ConfigProperty();
+        System.setProperty(configProperty.getChromeDriver(), configProperty.getUrl());
         PageFactory.initElements(new CustomFieldDecorator(
-                new DefaultElementLocatorFactory(driver)
-        ), this);
+                new DefaultElementLocatorFactory(Driver.getDriver())), this);
     }
 }

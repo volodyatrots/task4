@@ -2,13 +2,12 @@ package com.epam.lab;
 
 import com.epam.lab.businessobjects.GmailLoginBO;
 import com.epam.lab.businessobjects.MessagesBO;
-import com.epam.lab.driver.DriverFactory;
-import com.epam.lab.models.GmailData;
+import com.epam.lab.driver.Driver;
+import com.epam.lab.models.unmarsheller.Message;
+import com.epam.lab.models.unmarsheller.MessageUnmarshaller;
 import com.epam.lab.models.unmarsheller.User;
 import com.epam.lab.models.unmarsheller.UserDataUnmarshaller;
-import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
@@ -19,39 +18,39 @@ import static org.testng.Assert.assertTrue;
 
 
 public class TestGmail {
-    List<User> users;
-    private WebDriver driver;
-    private GmailData gmailData;
-    private GmailLoginBO gmailLoginBO;
-    private MessagesBO messagesBO;
 
     @DataProvider(parallel = true)
     public Object[][] getUsersData() {
-        users = new UserDataUnmarshaller().createObjectsUserData();
+        List<User> users = new UserDataUnmarshaller().createObjectsUserData();
+        List<Message> messages = new MessageUnmarshaller().createObjectsMessage();
         return new Object[][]{
-                {users.get(0).getEmail(), users.get(0).getPassword()},
-                {users.get(1).getEmail(), users.get(1).getPassword()}
+                {users.get(0), messages.get(0)},
+
+                {users.get(1), messages.get(1)},
+
+                {users.get(2), messages.get(2)},
+
+                {users.get(3), messages.get(3)},
+
+                {users.get(4), messages.get(4)}
         };
     }
 
-    @BeforeMethod
-    public void setUp() {
-        gmailData = new GmailData();
-        gmailLoginBO = new GmailLoginBO();
-        messagesBO = new MessagesBO();
-    }
 
+    @Test(dataProvider = "getUsersData", threadPoolSize = 5)
+    public void sendFromDrafts(User user, Message message) {
 
-    @Test(dataProvider = "getUsersData",threadPoolSize = 2)
-    public void sendFromDrafts(String email, String password) {
+        GmailLoginBO gmailLoginBO = new GmailLoginBO();
 
-        gmailLoginBO.openLoginPage(gmailData.getGmailLink());
+        gmailLoginBO.openLoginPage();
 
-        gmailLoginBO.login(email, password);
+        gmailLoginBO.login(user);
 
         assertTrue(gmailLoginBO.checkLoginSuccess());
 
-        messagesBO.writeLetterAndSave(gmailData.getMailTo(), gmailData.getMailSubject(), gmailData.getMailMessage());
+        MessagesBO messagesBO = new MessagesBO();
+
+        messagesBO.writeLetterAndSave(message);
 
         messagesBO.openDrafts();
 
@@ -66,6 +65,6 @@ public class TestGmail {
 
     @AfterMethod
     public void closeDriver() {
-        DriverFactory.getInstance().removeDriver();
+        Driver.close();
     }
 }
