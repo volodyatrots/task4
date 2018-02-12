@@ -1,26 +1,28 @@
 package com.epam.lab.pageobjects;
 
-import com.epam.lab.control.PageElement;
+import com.epam.lab.control.elements.Button;
+import com.epam.lab.control.elements.TextInput;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-public class LetterPage extends AbstractGmailPage {
-    @FindBy(className = "vO")
-    private PageElement mailToInput;
+public class LetterPage extends PageObject {
+    @FindBy(xpath = "//textarea[@name='to']")
+    private TextInput mailToInput;
 
     @FindBy(xpath = ("//span[@class='ag a8k']"))
-    private PageElement showSentMessage;
+    private WebElement showSentMessage;
 
     @FindBy(css = ".aoT")
-    private PageElement mailSubjectInput;
+    private TextInput mailSubjectInput;
 
     @FindBy(css = "div[class='Am Al editable LW-avf']")
-    private PageElement mailMessageInput;
+    private TextInput mailMessageInput;
 
     @FindBy(css = ".Ha")
-    private PageElement closeButton;
+    private Button closeButton;
 
     @FindBy(css = "td[class='gU Up']")
-    private PageElement sendButton;
+    private Button sendButton;
 
 
     public void enterEmailTo(String mailTo) {
@@ -43,7 +45,7 @@ public class LetterPage extends AbstractGmailPage {
         sendButton.click();
     }
 
-    public PageElement checkSentMessage() {
+    public WebElement checkSentMessage() {
         return showSentMessage;
     }
 

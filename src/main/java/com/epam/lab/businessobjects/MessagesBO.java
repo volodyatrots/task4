@@ -1,10 +1,11 @@
 package com.epam.lab.businessobjects;
 
-import com.epam.lab.control.PageElement;
-import com.epam.lab.models.unmarsheller.Message;
+
+import com.epam.lab.models.MessageModel;
 import com.epam.lab.pageobjects.DraftsPage;
 import com.epam.lab.pageobjects.GmailInboxPage;
 import com.epam.lab.pageobjects.LetterPage;
+import org.openqa.selenium.WebElement;
 
 public class MessagesBO {
     private DraftsPage draftsPage;
@@ -18,7 +19,7 @@ public class MessagesBO {
         letterPage = new LetterPage();
     }
 
-    public void writeLetterAndSave(Message message) {
+    public void writeLetter(MessageModel message) {
         gmailInboxPage.composeLetter();
         letterPage.enterEmailTo(message.getMailTo());
         letterPage.enterEmailSubject(message.getMailSubject());
@@ -43,7 +44,7 @@ public class MessagesBO {
         letterPage.sendLetter();
     }
 
-    public PageElement checkSentMessage() {
+    public WebElement checkSentMessage() {
         return letterPage.checkSentMessage();
     }
 }

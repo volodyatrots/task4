@@ -1,23 +1,22 @@
 package com.epam.lab.pageobjects;
 
 
-import com.epam.lab.control.PageElement;
+import com.epam.lab.control.elements.TextInput;
 import com.epam.lab.driver.Driver;
-import com.epam.lab.models.ConfigProperty;
+import com.epam.lab.utils.property.ConfigProperty;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.support.FindBy;
 
-public class GmailLoginPage extends AbstractGmailPage {
-    ConfigProperty configProperty;
+public class GmailLoginPage extends PageObject {
     @FindBy(css = "input[type='email']")
-    private PageElement emailInput;
+    private TextInput emailInput;
 
     @FindBy(css = "input[name='password']")
-    private PageElement passwordInput;
+    private TextInput passwordInput;
 
 
     public void openLoginPage() {
-        configProperty = new ConfigProperty();
+        ConfigProperty configProperty = new ConfigProperty();
         Driver.getDriver().get(configProperty.getGmailLink());
     }
 

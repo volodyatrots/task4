@@ -1,4 +1,4 @@
-package com.epam.lab.models;
+package com.epam.lab.utils.property;
 
 import java.io.FileInputStream;
 import java.io.IOException;

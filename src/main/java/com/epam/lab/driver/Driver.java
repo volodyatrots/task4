@@ -5,22 +5,32 @@ import org.openqa.selenium.chrome.ChromeDriver;
 
 import java.util.concurrent.TimeUnit;
 
+import static java.lang.Integer.parseInt;
+
 public class Driver {
-
-    private Driver() {
-    }
-
+    private static int countThreads =0;
     private static final ThreadLocal<WebDriver> threadLocalScope = new ThreadLocal<WebDriver>() {
         @Override
         protected WebDriver initialValue() {
-            System.out.println("Thread " + Thread.currentThread().getId());
+            countThreads++;
+            if (countThreads <=2) {
+                synchronized (threadLocalScope) {
+                    try {
+                        threadLocalScope.wait();
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
 
             WebDriver driver = new ChromeDriver();
-            driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-
+            driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
             return driver;
         }
     };
+
+    private Driver() {
+    }
 
     public static void close() {
         if (getDriver() != null) {
@@ -29,6 +39,10 @@ public class Driver {
             } catch (Exception e) {
                 e.printStackTrace();
             }
+            ;
+            synchronized (threadLocalScope) {
+                threadLocalScope.notify();
+            }
             threadLocalScope.remove();
         }
     }
@@ -36,5 +50,4 @@ public class Driver {
     public static WebDriver getDriver() {
         return threadLocalScope.get();
     }
-
 }

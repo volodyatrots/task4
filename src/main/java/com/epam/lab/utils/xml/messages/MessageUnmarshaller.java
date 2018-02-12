@@ -1,7 +1,7 @@
-package com.epam.lab.models.unmarsheller;
+package com.epam.lab.utils.xml.messages;
 
-import com.epam.lab.models.ConfigProperty;
 import com.epam.lab.models.MessageModel;
+import com.epam.lab.utils.property.ConfigProperty;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
@@ -11,16 +11,15 @@ import java.util.List;
 
 public class MessageUnmarshaller {
 
-    public List<Message> createObjectsMessage() {
+    public List<MessageModel> createObjectsMessage() {
         try {
             ConfigProperty configProperty = new ConfigProperty();
-            JAXBContext context = JAXBContext.newInstance(MessageModel.class);
+            JAXBContext context = JAXBContext.newInstance(Messages.class);
             Unmarshaller un = context.createUnmarshaller();
-            MessageModel messageModel = (MessageModel) un.unmarshal(new File(configProperty.getPathMessage()));
-            return messageModel.getMessages();
+            Messages messages = (Messages) un.unmarshal(new File(configProperty.getPathMessage()));
+            return messages.getMessages();
         } catch (JAXBException e) {
             e.printStackTrace();
-        }
-        return null;
+        }return null;
     }
 }

@@ -1,6 +1,6 @@
-package com.epam.lab.models;
+package com.epam.lab.utils.xml.users;
 
-import com.epam.lab.models.unmarsheller.User;
+import com.epam.lab.models.UserModel;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -10,15 +10,15 @@ import java.util.List;
 
 @XmlRootElement(name = "users")
 @XmlAccessorType(XmlAccessType.FIELD)
-public class UsersModel {
+public class Users {
     @XmlElement(name = "user")
-    public List<User> users = null;
+    private List<UserModel> userModels = null;
 
-    public List<User> getUsers() {
-        return users;
+    public List<UserModel> getUserModels() {
+        return userModels;
     }
 
-    public void setUsers(List<User> users) {
-        this.users = users;
+    public void setUserModels(List<UserModel> userModels) {
+        this.userModels = userModels;
     }
 }

@@ -1,24 +1,37 @@
 package com.epam.lab.models;
 
-import com.epam.lab.models.unmarsheller.Message;
-
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
-import java.util.List;
 
-@XmlRootElement(name = "messages")
+@XmlRootElement(name = "message")
 @XmlAccessorType(XmlAccessType.FIELD)
 public class MessageModel {
-    @XmlElement(name = "message")
-    public List<Message> messages = null;
+    private String mailto;
+    private String mailsubject;
+    private String mailmessage;
 
-    public List<Message> getMessages() {
-        return messages;
+    public String getMailTo() {
+        return mailto;
     }
 
-    public void setUsers(List<Message> messages) {
-        this.messages = messages;
+    public void setMailTo(String mailto) {
+        this.mailto = mailto;
+    }
+
+    public String getMailSubject() {
+        return mailsubject;
+    }
+
+    public void setMailSubject(String mailsubject) {
+        this.mailsubject = mailsubject;
+    }
+
+    public String getMailMessage() {
+        return mailmessage;
+    }
+
+    public void setMailMessage(String mailmessage) {
+        this.mailmessage = mailmessage;
     }
 }

@@ -1,20 +1,24 @@
 package com.epam.lab.pageobjects;
 
 
-import com.epam.lab.control.PageElement;
+import com.epam.lab.control.elements.Button;
 import com.epam.lab.driver.Driver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class DraftsPage extends AbstractGmailPage {
+public class DraftsPage extends PageObject {
     private Boolean statusLoad;
+
     @FindBy(xpath = "//div[@class='aim'][3]")
-    private PageElement draftsButton;
+    private Button draftsButton;
+
     @FindBy(xpath = "//input[@name='q']")
-    private PageElement searchField;
+    private WebElement searchField;
+
     @FindBy(xpath = "//span[contains(text(),'Hi!')]")
-    private PageElement myLetter;
+    private WebElement myLetter;
 
 
     public void openDrafts() {
@@ -22,7 +26,7 @@ public class DraftsPage extends AbstractGmailPage {
     }
 
     public void waitLoadDrafts() {
-        statusLoad = new WebDriverWait(Driver.getDriver(), 5).until(ExpectedConditions.textToBePresentInElementValue(searchField, "in:draft "));
+        statusLoad = new WebDriverWait(Driver.getDriver(), 60).until(ExpectedConditions.textToBePresentInElementValue(searchField, "in:draft "));
     }
 
     public boolean checkLoadDrafts() {

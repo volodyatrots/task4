@@ -1,17 +1,15 @@
-package com.epam.lab.control;
+package com.epam.lab.control.elements;
 
 import org.openqa.selenium.*;
 
 import java.util.List;
 
-public class PageElement implements WebElement {
+public class Element implements WebElement {
+    protected WebElement webElement;
 
-    private WebElement webElement;
-
-    PageElement(WebElement webElement) {
+    public Element(WebElement webElement) {
         this.webElement = webElement;
     }
-
 
     @Override
     public void click() {

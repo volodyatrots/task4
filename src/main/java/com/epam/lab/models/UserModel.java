@@ -1,4 +1,4 @@
-package com.epam.lab.models.unmarsheller;
+package com.epam.lab.models;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -6,7 +6,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement(name = "user")
 @XmlAccessorType(XmlAccessType.FIELD)
-public class User {
+public class UserModel {
     private String email;
     private String password;
 
