@@ -5,7 +5,6 @@ import com.epam.lab.models.MessageModel;
 import com.epam.lab.pageobjects.DraftsPage;
 import com.epam.lab.pageobjects.GmailInboxPage;
 import com.epam.lab.pageobjects.LetterPage;
-import org.openqa.selenium.WebElement;
 
 public class MessagesBO {
     private DraftsPage draftsPage;
@@ -29,7 +28,6 @@ public class MessagesBO {
 
     public void openDrafts() {
         draftsPage.openDrafts();
-        draftsPage.waitLoadDrafts();
     }
 
     public boolean checkLoadDrafts() {
@@ -44,7 +42,7 @@ public class MessagesBO {
         letterPage.sendLetter();
     }
 
-    public WebElement checkSentMessage() {
+    public boolean checkSentMessage() {
         return letterPage.checkSentMessage();
     }
 }

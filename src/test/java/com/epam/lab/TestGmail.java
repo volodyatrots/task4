@@ -7,11 +7,9 @@ import com.epam.lab.models.MessageModel;
 import com.epam.lab.models.UserModel;
 import com.epam.lab.utils.xml.XMLData;
 import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeClass;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-import static org.testng.Assert.assertNotNull;
 import static org.testng.Assert.assertTrue;
 
 
@@ -28,13 +26,13 @@ public class TestGmail {
 
         GmailLoginBO gmailLoginBO = new GmailLoginBO();
 
-        MessagesBO messagesBO = new MessagesBO();
-
         gmailLoginBO.openLoginPage();
 
         gmailLoginBO.loginAS(userModel);
 
         assertTrue(gmailLoginBO.checkLoginSuccess());
+
+        MessagesBO messagesBO = new MessagesBO();
 
         messagesBO.writeLetter(message);
 
@@ -46,7 +44,7 @@ public class TestGmail {
 
         messagesBO.sendLetter();
 
-        assertNotNull(messagesBO.checkSentMessage());
+        assertTrue(messagesBO.checkSentMessage());
     }
 
     @AfterMethod
