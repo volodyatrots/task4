@@ -1,5 +1,6 @@
 package com.epam.lab;
 
+/*
 import com.epam.lab.businessobjects.GmailLoginBO;
 import com.epam.lab.businessobjects.MessagesBO;
 import com.epam.lab.driver.Driver;
@@ -11,6 +12,7 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import static org.testng.Assert.assertTrue;
+*/
 
 
 public class TestGmail {

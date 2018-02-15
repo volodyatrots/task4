@@ -31,7 +31,7 @@ public class GmailStep {
 
     @When("^I write message$")
     public void writeLetter() {
-        messagesBO.writeLetter("ltd67392@cjpeg.com", "Test", "Hi!");
+        messagesBO.writeLetter("testseleniumlab53@gmail.com", "Test", "Hi!");
     }
 
     @When("^Open Drafts Page$")
