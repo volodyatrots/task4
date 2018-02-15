@@ -3,6 +3,7 @@ package com.epam.lab.pageobjects;
 
 import com.epam.lab.control.elements.TextInput;
 import com.epam.lab.driver.Driver;
+import com.epam.lab.driver.DriverSingleton;
 import com.epam.lab.utils.property.ConfigProperty;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.support.FindBy;

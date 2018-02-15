@@ -15,7 +15,7 @@ import static org.testng.Assert.assertTrue;
 
 public class TestGmail {
 
-    @DataProvider(parallel = true)
+    /*@DataProvider(parallel = true)
     public Object[][] getUsersData() {
         return new XMLData().getGmailData();
     }
@@ -49,6 +49,6 @@ public class TestGmail {
 
     @AfterMethod
     public void closeDriver() {
-        Driver.close();
-    }
+        Driver.getDriver().quit();
+    }*/
 }

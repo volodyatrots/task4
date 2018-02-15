@@ -18,4 +18,5 @@ public class XMLData {
         }
         return gmailData;
     }
+
 }

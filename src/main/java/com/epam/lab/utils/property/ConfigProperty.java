@@ -10,7 +10,7 @@ public class ConfigProperty {
     public ConfigProperty() {
         FileInputStream input = null;
         try {
-            input = new FileInputStream("src/resources/config.properties");
+            input = new FileInputStream("src/main/resources/config.properties");
             prop.load(input);
         } catch (IOException e) {
             e.printStackTrace();

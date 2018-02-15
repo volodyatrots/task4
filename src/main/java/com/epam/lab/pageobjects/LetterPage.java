@@ -13,8 +13,8 @@ public class LetterPage extends PageObject {
     @FindBy(xpath = "//textarea[@name='to']")
     private TextInput mailToInput;
 
-    @FindBy(xpath = ("//span[@class='ag a8k']"))
-    private Button showSentMessage;
+    @FindBy(css = (".vh"))
+    private Button labelSentMessage;
 
     @FindBy(css = ".aoT")
     private TextInput mailSubjectInput;
@@ -50,7 +50,7 @@ public class LetterPage extends PageObject {
     }
 
     public boolean checkSentMessage() {
-        if ((new WebDriverWait(Driver.getDriver(), 60)).until(ExpectedConditions.elementToBeClickable(showSentMessage)) != null) {
+        if ((new WebDriverWait(Driver.getDriver(), 60)).until(ExpectedConditions.elementToBeClickable(labelSentMessage)) != null) {
             ifSentMessage = true;
         }
         return ifSentMessage;
