@@ -34,4 +34,5 @@ public class MessageModel {
     public void setMailMessage(String mailmessage) {
         this.mailmessage = mailmessage;
     }
+
 }

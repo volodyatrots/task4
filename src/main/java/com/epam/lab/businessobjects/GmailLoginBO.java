@@ -18,9 +18,9 @@ public class GmailLoginBO {
     }
 
 
-    public void loginAS(String login,String password) {
-        gmailLoginPage.enterEmail(login);
-        gmailLoginPage.enterPassword(password);
+    public void loginAS(UserModel userModel) {
+        gmailLoginPage.enterEmail(userModel.getEmail());
+        gmailLoginPage.enterPassword(userModel.getPassword());
     }
 
     public boolean checkLoginSuccess() {

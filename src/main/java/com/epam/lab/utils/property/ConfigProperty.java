@@ -44,4 +44,10 @@ public class ConfigProperty {
     public String getPathUserData() {
         return prop.getProperty("pathUserData");
     }
+    public String getPathXLSXUsers() {
+        return prop.getProperty("pathXLSXUsers");
+    }
+    public String getPathCSVMessages() {
+        return prop.getProperty("pathCSVMessages");
+    }
 }

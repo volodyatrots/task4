@@ -18,11 +18,11 @@ public class MessagesBO {
         letterPage = new LetterPage();
     }
 
-    public void writeLetter(String mailTo,String mailSubject,String mailMessage) {
+    public void writeLetter(MessageModel message) {
         gmailInboxPage.composeLetter();
-        letterPage.enterEmailTo(mailTo);
-        letterPage.enterEmailSubject(mailSubject);
-        letterPage.enterMessage(mailMessage);
+        letterPage.enterEmailTo(message.getMailTo());
+        letterPage.enterEmailSubject(message.getMailSubject());
+        letterPage.enterMessage(message.getMailMessage());
         letterPage.closeLetter();
     }
 

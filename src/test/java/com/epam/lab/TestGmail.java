@@ -1,29 +1,20 @@
 package com.epam.lab;
 
-/*
 import com.epam.lab.businessobjects.GmailLoginBO;
 import com.epam.lab.businessobjects.MessagesBO;
 import com.epam.lab.driver.Driver;
 import com.epam.lab.models.MessageModel;
 import com.epam.lab.models.UserModel;
-import com.epam.lab.utils.xml.XMLData;
+import com.epam.lab.utils.provider.TestProvider;
 import org.testng.annotations.AfterMethod;
-import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import static org.testng.Assert.assertTrue;
-*/
 
 
 public class TestGmail {
 
-    /*@DataProvider(parallel = true)
-    public Object[][] getUsersData() {
-        return new XMLData().getGmailData();
-    }
-
-
-    @Test(dataProvider = "getUsersData", threadPoolSize = 5)
+    @Test(dataProvider = "getUsersData", dataProviderClass = TestProvider.class)
     public void sendFromDrafts(UserModel userModel, MessageModel message) {
 
         GmailLoginBO gmailLoginBO = new GmailLoginBO();
@@ -51,6 +42,6 @@ public class TestGmail {
 
     @AfterMethod
     public void closeDriver() {
-        Driver.getDriver().quit();
-    }*/
+        Driver.close();
+    }
 }
