@@ -1,4 +1,4 @@
-package com.epam.lab;
+package com.epam.lab.tests;
 
 import com.epam.lab.businessobjects.GmailLoginBO;
 import com.epam.lab.businessobjects.MessagesBO;

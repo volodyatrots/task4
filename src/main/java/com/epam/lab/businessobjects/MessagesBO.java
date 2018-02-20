@@ -5,8 +5,10 @@ import com.epam.lab.models.MessageModel;
 import com.epam.lab.pageobjects.DraftsPage;
 import com.epam.lab.pageobjects.GmailInboxPage;
 import com.epam.lab.pageobjects.LetterPage;
+import org.apache.log4j.Logger;
 
 public class MessagesBO {
+    private static final Logger LOG = Logger.getLogger(GmailLoginBO.class);
     private DraftsPage draftsPage;
     private GmailInboxPage gmailInboxPage;
     private LetterPage letterPage;
@@ -19,6 +21,7 @@ public class MessagesBO {
     }
 
     public void writeLetter(MessageModel message) {
+        LOG.info("Writing Letter");
         gmailInboxPage.composeLetter();
         letterPage.enterEmailTo(message.getMailTo());
         letterPage.enterEmailSubject(message.getMailSubject());
@@ -27,6 +30,7 @@ public class MessagesBO {
     }
 
     public void openDrafts() {
+        LOG.info("Opening Drafts");
         draftsPage.openDrafts();
     }
 
@@ -35,14 +39,17 @@ public class MessagesBO {
     }
 
     public void openMyLetter() {
+        LOG.info("Opening Saved Letter");
         draftsPage.openMyLetter();
     }
 
     public void sendLetter() {
+        LOG.info("Sending Letter");
         letterPage.sendLetter();
     }
 
     public boolean checkSentMessage() {
+        LOG.info("Check IF Sent Letter");
         return letterPage.checkSentMessage();
     }
 }
