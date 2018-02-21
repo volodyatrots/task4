@@ -4,9 +4,9 @@
            failures="1"
            errors="0"
            skipped="0"
-           time="0,003">
+           time="0,001">
   <properties />
-            <testcase name="ifGmailAccount" time="0,003" classname="com.epam.lab.tests.TestAccount">
+            <testcase name="ifGmailAccount" time="0,001" classname="com.epam.lab.tests.TestAccount">
                 <failure type="java.lang.AssertionError"
                   message="expected [true] but found [false]"
               >

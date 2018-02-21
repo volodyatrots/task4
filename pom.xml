@@ -11,6 +11,9 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>2.20.1</version>
                 <configuration>
+                    <suiteXmlFiles>
+                        <suiteXmlFile>testng.xml</suiteXmlFile>
+                    </suiteXmlFiles>
                     <properties>
                         <property>
                             <name>usedefaultlisteners</name>
@@ -21,9 +24,6 @@
                             <value>org.uncommons.reportng.HTMLReporter, org.uncommons.reportng.JUnitXMLReporter</value>
                         </property>
                     </properties>
-                    <includes>
-                        <include>TestGmail.java</include>
-                    </includes>
                 </configuration>
             </plugin>
             <plugin>
