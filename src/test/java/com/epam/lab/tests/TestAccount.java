@@ -9,7 +9,7 @@ public class TestAccount {
 
     @Test
     public void ifGmailAccount() {
-        String mail = "mytestmail@gmail.com";
+        String mail = "mytestmail@mail.com";
         assertTrue(mail.contains("@gmail.com"));
     }
 
